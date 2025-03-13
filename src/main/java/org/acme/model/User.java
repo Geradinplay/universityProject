@@ -13,11 +13,18 @@ private Long id;
 private String nickname;
 private int health;
 private Long experience;
-@ManyToMany(cascade = CascadeType.PERSIST)
-private List<Items> items;
-@OneToOne(cascade = CascadeType.PERSIST)
+@ManyToMany(cascade = CascadeType.ALL)
+@JoinTable(//Промежуточная таблица
+        name = "user_items",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "item_id")
+)
+private List<Item> items;
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "personal_data_id")
 private PersonalData personalData;
-@ManyToOne(cascade = CascadeType.PERSIST)
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "profession_id")
 private Profession profession;
 
     public Long getId() {
@@ -52,11 +59,11 @@ private Profession profession;
         this.experience = experience;
     }
 
-    public List<Items> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Items> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
