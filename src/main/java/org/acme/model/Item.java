@@ -1,5 +1,6 @@
 package org.acme.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 //@NamedQueries({ @NamedQuery(name = Student.GET_ALL_STUDENTS, query = "Select s from Student s"),
@@ -19,7 +20,8 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
     private Long id;
-    @JoinColumn(name = "nameOfItem")
+    @Column(name = "nameOfItem")
+    @JsonProperty("name")
     private String nameOfItem;
 
     public Long getId() {
