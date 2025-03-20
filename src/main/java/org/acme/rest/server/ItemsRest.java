@@ -2,9 +2,7 @@ package org.acme.rest.server;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.exception.ItemsException;
@@ -24,14 +22,6 @@ public class ItemsRest {
     @Inject
     private ItemService itemService;
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-////    @Path("")
-//    public Response getAllItems(){
-//        List<Item>items= itemsClient.getAll();
-//        return  Response.ok().entity(items).build();
-//    }
-
         @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")
@@ -41,18 +31,33 @@ public class ItemsRest {
     }
 
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/add")
-    public Response addItems(){
-        Item item = new Item();
-        item.setNameOfItem("Лопата");
-        try {
-            itemService.createItem(item);
-        } catch (ItemsException e) {
-            return Response.serverError().entity(e.getMessage()).build();
-        }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/add")
+//    public Response addItems(){
+//        Item item = new Item();
+//        item.setNameOfItem("Лопата");
+//        try {
+//            itemService.createItem(item);
+//        } catch (ItemsException e) {
+//            return Response.serverError().entity(e.getMessage()).build();
+//        }
+//
+//        return  Response.ok().entity(item).build();
+//    }
 
-        return  Response.ok().entity(item).build();
-    }
+//    @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+        @POST
+        public Response createItem(Item item) {
+        if (item == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
+        }
+            try {
+                itemService.createItem(item);
+            } catch (ItemsException e) {
+                return Response.serverError().entity(e.getMessage()).build();
+            }
+            return Response.status(Response.Status.CREATED).entity(item).build();
+        }
 }

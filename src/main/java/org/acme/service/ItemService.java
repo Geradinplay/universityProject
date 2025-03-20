@@ -23,13 +23,13 @@ public class ItemService {
     @Transactional
     public Item createItem(Item item) throws ItemsException {
 
-        List<Item> students = getAllItems();// полукчаем список предметов
+        List<Item> students = getAllItems();// получаем список предметов
 
         if (students.contains(item)) {// Проверяем на наличие этого предмета в базе данных
             throw new ItemsException(ItemsStatus.EXISTS.getLabel());
         }
-
-        return manager.merge(item);// Добавляем или обновляет существующий предмет
+       // Добавляем или обнавляет существующий предмет
+        return manager.merge(item);
     }
 
     public List<Item> getAllItems() {

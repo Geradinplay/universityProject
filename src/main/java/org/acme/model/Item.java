@@ -18,11 +18,19 @@ public class Item {
     public static final String GET_ITEM_BY_ID = "Item.getItemById";
 
     @Id
+    @SequenceGenerator(name="item_seq", sequenceName = "item_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
     private Long id;
-    @Column(name = "nameOfItem")
     @JsonProperty("name")
+    @Column(name = "nameOfItem")
     private String nameOfItem;
+
+    public Item() {}
+
+    public Item(Long id, String nameOfItem) {
+        this.id = id;
+        this.nameOfItem = nameOfItem;
+    }
 
     public Long getId() {
         return id;
@@ -39,4 +47,6 @@ public class Item {
     public void setNameOfItem(String nameOfItem) {
         this.nameOfItem = nameOfItem;
     }
+
+
 }

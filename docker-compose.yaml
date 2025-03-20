@@ -1,9 +1,29 @@
-  version: '3'
-  services:
-    pgadmin:
-      image: dpage/pgadmin4:8
-      environment:
-        - PGADMIN_DEFAULT_EMAIL=test
-        - PGADMIN_DEFAULT_PASSWORD=test
-      ports:
-        - 27019:80
+version: '3'
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=Initial0
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - my_network
+  pgadmin:
+    image: dpage/pgadmin4:8
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@sap.com
+      - PGADMIN_DEFAULT_PASSWORD=Initial0
+    ports:
+      - 8000:80
+    links:
+      - postgres:postgres
+    networks:
+      - my_network
+volumes:
+  pgdata:
+
+networks:
+  my_network:
+    driver: bridge
