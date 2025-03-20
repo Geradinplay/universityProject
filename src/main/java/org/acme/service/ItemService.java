@@ -48,6 +48,14 @@ public class ItemService {
         return item;
     }
 
+    @Transactional
+    public Item deleteItemById(Long id) {
+        Item item = manager.find(Item.class, id);
+        if (item != null) {
+            manager.remove(item);
+        }
+        return item; // Вернем удаленный объект, если нужно
+    }
 }
 
 //@Transactional

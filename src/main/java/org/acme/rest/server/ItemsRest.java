@@ -22,31 +22,13 @@ public class ItemsRest {
     @Inject
     private ItemService itemService;
 
-        @GET
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/all")
     public Response getAllItems(){
         List<Item>items= itemService.getAllItems();
         return  Response.ok().entity(items).build();
     }
 
-
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Path("/add")
-//    public Response addItems(){
-//        Item item = new Item();
-//        item.setNameOfItem("Лопата");
-//        try {
-//            itemService.createItem(item);
-//        } catch (ItemsException e) {
-//            return Response.serverError().entity(e.getMessage()).build();
-//        }
-//
-//        return  Response.ok().entity(item).build();
-//    }
-
-//    @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
         @POST
         public Response createItem(Item item) {
@@ -60,4 +42,15 @@ public class ItemsRest {
             }
             return Response.status(Response.Status.CREATED).entity(item).build();
         }
+
+    @Consumes(MediaType.APPLICATION_JSON)
+    @DELETE
+    @Path("/{id}")
+    public Response deleteItemById(@PathParam("id")Long id) {
+        if (id == 0) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
+        }
+        Item item =itemService.deleteItemById(id);
+        return Response.status(Response.Status.OK).entity(item).build();
+    }
 }
