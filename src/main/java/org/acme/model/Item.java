@@ -18,14 +18,15 @@ public class Item {
     public static final String GET_ITEM_BY_ID = "Item.getItemById";
 
     @Id
-    @SequenceGenerator(name="item_seq", sequenceName = "item_seq", allocationSize = 1)
+    @SequenceGenerator(name = "item_seq", sequenceName = "item_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
     private Long id;
     @JsonProperty("name")
     @Column(name = "nameOfItem")
     private String nameOfItem;
 
-    public Item() {}
+    public Item() {
+    }
 
     public Item(Long id, String nameOfItem) {
         this.id = id;

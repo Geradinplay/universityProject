@@ -8,6 +8,7 @@ import org.acme.enums.ItemsStatus;
 import org.acme.exception.ItemsException;
 import org.acme.model.Item;
 import org.acme.model.Item;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ItemService {
         if (students.contains(item)) {// Проверяем на наличие этого предмета в базе данных
             throw new ItemsException(ItemsStatus.EXISTS.getLabel());
         }
-       // Добавляем или обнавляет существующий предмет
+        // Добавляем или обнавляет существующий предмет
         return manager.merge(item);
     }
 
@@ -36,12 +37,12 @@ public class ItemService {
         List<Item> Item = manager.createNamedQuery(GET_ALL_ITEMS, Item.class).getResultList();
 
         for (Item item : Item) {// temp
-            System.out.println("["+item.getId()+"] "+item.getNameOfItem());//Простой вывод предметов для теста
+            System.out.println("[" + item.getId() + "] " + item.getNameOfItem());//Простой вывод предметов для теста
         }
         return Item;
     }
 
-    public Item getItemById(Long id){
+    public Item getItemById(Long id) {
         Item item = manager.createNamedQuery(GET_ITEM_BY_ID, Item.class)
                 .setParameter("id", id)
                 .getSingleResult();
@@ -53,6 +54,15 @@ public class ItemService {
         Item item = manager.find(Item.class, id);
         if (item != null) {
             manager.remove(item);
+        }
+        return item; // Вернем удаленный объект, если нужно
+    }
+
+    @Transactional
+    public Item updateItemById(Long id, Item updatedItem) {
+        Item item = manager.find(Item.class, id);
+        if (item != null) {
+            item.setNameOfItem(updatedItem.getNameOfItem());  // Обновляем имя
         }
         return item; // Вернем удаленный объект, если нужно
     }
