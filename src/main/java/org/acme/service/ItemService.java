@@ -24,22 +24,22 @@ public class ItemService {
     @Transactional
     public Item createItem(Item item) throws ItemsException {
 
-        List<Item> students = getAllItems();// получаем список предметов
+        List<Item> items = getAllItems();// получаем список предметов
 
-        if (students.contains(item)) {// Проверяем на наличие этого предмета в базе данных
+        if (items.contains(item)) {// Проверяем на наличие этого предмета в базе данных
             throw new ItemsException(ItemsStatus.EXISTS.getLabel());
         }
-        // Добавляем или обнавляет существующий предмет
+        // Добавляем или обновляет существующий предмет
         return manager.merge(item);
     }
 
     public List<Item> getAllItems() {
-        List<Item> Item = manager.createNamedQuery(GET_ALL_ITEMS, Item.class).getResultList();
+        List<Item> items = manager.createNamedQuery(GET_ALL_ITEMS, Item.class).getResultList();
 
-        for (Item item : Item) {// temp
+        for (Item item : items) {// temp
             System.out.println("[" + item.getId() + "] " + item.getNameOfItem());//Простой вывод предметов для теста
         }
-        return Item;
+        return items;
     }
 
     public Item getItemById(Long id) {
