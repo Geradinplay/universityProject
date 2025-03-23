@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {// Получаем всех пользователей
-        List<User> users = manager.createNamedQuery(GET_ALL_ITEMS, User.class).getResultList();
+        List<User> users = manager.createNamedQuery(User.GET_ALL_ITEMS, User.class).getResultList();
         return users;
     }
 }

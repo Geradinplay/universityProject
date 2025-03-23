@@ -4,9 +4,15 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+
+@NamedQueries({
+        @NamedQuery(name = User.GET_ALL_ITEMS, query = "SELECT i FROM User i")
+})
 @Entity
 @Table(name = "users")
 public class User {
+    public static final String GET_ALL_ITEMS = "User.getAllUsers";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
 private Long id;

@@ -8,7 +8,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import java.util.List;
 @Path("/api")
 @RegisterRestClient
-public interface ItemsClient {
+public interface ItemClient {
         @GET
         @Path("/items")
         List<Item> getAll();

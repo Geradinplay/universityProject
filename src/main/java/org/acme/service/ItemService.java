@@ -34,7 +34,7 @@ public class ItemService {
     }
 
     public List<Item> getAllItems() {
-        List<Item> items = manager.createNamedQuery(GET_ALL_ITEMS, Item.class).getResultList();
+        List<Item> items = manager.createNamedQuery(Item.GET_ALL_ITEMS, Item.class).getResultList();
 
         for (Item item : items) {// temp
             System.out.println("[" + item.getId() + "] " + item.getNameOfItem());//Простой вывод предметов для теста

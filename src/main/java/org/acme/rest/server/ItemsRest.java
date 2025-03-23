@@ -1,11 +1,14 @@
 package org.acme.rest.server;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.exception.ItemsException;
 import org.acme.model.Item;
+import org.acme.rest.mapper.ItemMapper;
+import org.acme.rest.userDTO.ItemDTO;
 import org.acme.service.ItemService;
 
 import java.util.List;
@@ -18,6 +21,8 @@ public class ItemsRest {
 
     @Inject
     private ItemService itemService;
+    @Inject
+    private ItemMapper itemMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,16 +33,17 @@ public class ItemsRest {
 
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public Response createItem(Item item) {
-        if (item == null) {
+    public Response createItem(@Valid ItemDTO itemDTO) {
+        if (itemDTO == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
         }
         try {
+            Item item = itemMapper.toModel(itemDTO);
             itemService.createItem(item);
         } catch (ItemsException e) {
             return Response.serverError().entity(e.getMessage()).build();
         }
-        return Response.status(Response.Status.CREATED).entity(item).build();
+        return Response.status(Response.Status.CREATED).entity(itemDTO).build();
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
