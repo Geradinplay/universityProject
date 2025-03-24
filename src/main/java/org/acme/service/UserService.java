@@ -6,12 +6,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.acme.enums.ItemsStatus;
 import org.acme.exception.ItemsException;
-import org.acme.model.Item;
 import org.acme.model.User;
 
 import java.util.List;
 
-import static org.acme.model.Item.GET_ALL_ITEMS;
 
 @Dependent
 public class UserService {

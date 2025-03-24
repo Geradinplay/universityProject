@@ -14,7 +14,7 @@ import org.acme.service.ItemService;
 import java.util.List;
 
 @Path("/items")
-public class ItemsRest {
+public class ItemRest {
 //    @Inject
 //    @RestClient
 //    private ItemsClient itemsClient;

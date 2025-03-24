@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import org.acme.enums.ItemsStatus;
 import org.acme.exception.ItemsException;
 import org.acme.model.Item;
-import org.acme.model.Item;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,10 +34,6 @@ public class ItemService {
 
     public List<Item> getAllItems() {
         List<Item> items = manager.createNamedQuery(Item.GET_ALL_ITEMS, Item.class).getResultList();
-
-        for (Item item : items) {// temp
-            System.out.println("[" + item.getId() + "] " + item.getNameOfItem());//Простой вывод предметов для теста
-        }
         return items;
     }
 
