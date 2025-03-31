@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class Profession {
     public static final String GET_ALL_ITEMS = "Profession.getAllProfession";
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profession_seq")
     private Long id;
 
     private String nameOfProfession;

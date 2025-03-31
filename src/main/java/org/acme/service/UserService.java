@@ -29,13 +29,14 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {// Получаем всех пользователей
-        List<User> users = manager.createNamedQuery(User.GET_ALL_ITEMS, User.class).getResultList();
+        List<User> users = manager.createNamedQuery(User.GET_ALL_USERS, User.class).getResultList();
         return users;
     }
 
 
+
     public User findUsersById(Long id) {
-        User users = manager.createNamedQuery(User.FIND_USER_BY_ID, User.class).setParameter("id",id).getSingleResult();
+        User users = manager.createNamedQuery(User.GET_USER_BY_ID, User.class).setParameter("id",id).getSingleResult();
         return users;
     }
 

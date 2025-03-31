@@ -1,6 +1,7 @@
 package org.acme.rest.userDTO;
 
 import jakarta.validation.constraints.NotNull;
+import org.acme.model.Achievement;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class UserDTO {
         private Long experience;
         @NotNull
         private PersonalDataDTO personalData; // required
+        private List <Achievement> achievements;
 
         public String getNickname() {
             return nickname;
@@ -44,5 +46,13 @@ public class UserDTO {
         public void setPersonalData(PersonalDataDTO personalData) {
             this.personalData = personalData;
         }
+
+    public List<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
 }
 
