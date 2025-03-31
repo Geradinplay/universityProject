@@ -32,4 +32,14 @@ public class UserService {
         List<User> users = manager.createNamedQuery(User.GET_ALL_ITEMS, User.class).getResultList();
         return users;
     }
+
+
+    public User findUsersById(Long id) {
+        User users = manager.createNamedQuery(User.FIND_USER_BY_ID, User.class).setParameter("id",id).getSingleResult();
+        return users;
+    }
+
+    public User updateUser(User user){
+        return manager.merge(user);
+    }
 }

@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.acme.enums.ItemsStatus;
 import org.acme.exception.ItemsException;
 import org.acme.model.Item;
+import org.acme.model.User;
 
 import java.util.HashSet;
 import java.util.List;
@@ -61,6 +62,12 @@ public class ItemService {
         }
         return item; // Вернем удаленный объект, если нужно
     }
+
+    public Item findItemById(Long id) {
+        Item item = manager.createNamedQuery(GET_ITEM_BY_ID, Item.class).setParameter("id",id).getSingleResult();
+        return item;
+    }
+
 }
 
 //@Transactional

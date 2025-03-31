@@ -6,12 +6,14 @@ import java.util.List;
 
 
 @NamedQueries({
-        @NamedQuery(name = User.GET_ALL_ITEMS, query = "SELECT i FROM User i")
+        @NamedQuery(name = User.GET_ALL_ITEMS, query = "SELECT i FROM User i"),
+        @NamedQuery(name = User.FIND_USER_BY_ID, query = "SELECT u FROM User u WHERE u.id = :id")
 })
 @Entity
 @Table(name = "users")
 public class User {
     public static final String GET_ALL_ITEMS = "User.getAllUsers";
+    public static final String FIND_USER_BY_ID = "User.getUserById";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
@@ -87,5 +89,10 @@ private Profession profession;
 
     public void setProfession(Profession profession) {
         this.profession = profession;
+    }
+
+    public Item addItem(Item item){
+        items.add(item);
+        return item;
     }
 }

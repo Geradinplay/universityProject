@@ -10,8 +10,6 @@ public class UserDTO {
         private String nickname;
         private int health;
         private Long experience;
-        private List<ItemDTO> items; // optional
-        private ProfessionDTO profession; // optional
         @NotNull
         private PersonalDataDTO personalData; // required
 
@@ -37,22 +35,6 @@ public class UserDTO {
 
         public void setExperience(Long experience) {
             this.experience = experience;
-        }
-
-        public List<ItemDTO> getItems() {
-            return items;
-        }
-
-        public void setItems(List<ItemDTO> items) {
-            this.items = items;
-        }
-
-        public ProfessionDTO getProfession() {
-            return profession;
-        }
-
-        public void setProfession(ProfessionDTO profession) {
-            this.profession = profession;
         }
 
         public PersonalDataDTO getPersonalData() {
