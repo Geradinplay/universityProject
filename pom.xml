@@ -49,6 +49,13 @@
             <version>1.5.5.Final</version>
             <scope>provided</scope>
         </dependency>
+<!--    Зависимость для Mockito    -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>io.quarkus</groupId>
