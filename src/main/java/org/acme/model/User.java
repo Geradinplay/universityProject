@@ -35,7 +35,6 @@ private PersonalData personalData;
 @JoinColumn(name = "profession_id")
 private Profession profession;
 @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
-@JoinColumn(name = "achievement_id")
 private List <Achievement> achievements;
 
     public Long getId() {
