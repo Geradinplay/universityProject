@@ -53,8 +53,11 @@ public class ItemRest {
         if (id == 0) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
         }
-        Item item = itemService.deleteItemById(id);
-        return Response.status(Response.Status.OK).entity(item).build();
+        Item deleted = itemService.deleteItemById(id);
+        if (deleted == null) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        }
+        return Response.status(Response.Status.OK).entity(deleted).build();
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
@@ -63,7 +66,7 @@ public class ItemRest {
     public Response updateItemById(@PathParam("id") Long id, Item updatedItem) {
         Item item =itemService.updateItemById(id, updatedItem);
         if (item == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Item not found!").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Item not modified!").build();
         }
 
         return Response.status(Response.Status.OK).entity(item).build();

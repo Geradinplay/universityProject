@@ -1,5 +1,6 @@
 package org.acme.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -16,7 +17,7 @@ import static org.acme.model.Item.GET_ALL_ITEMS;
 import static org.acme.model.Item.GET_ITEM_BY_ID;
 
 
-@Dependent
+@ApplicationScoped
 public class ItemService {
     @Inject
     EntityManager manager;

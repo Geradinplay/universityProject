@@ -7,6 +7,7 @@ import org.hibernate.annotations.NotFound;
 
 public class ItemDTO {
     @NotNull
+    @JsonProperty("name")
     private String nameOfItem;
 
     public ItemDTO(String nameOfItem) {

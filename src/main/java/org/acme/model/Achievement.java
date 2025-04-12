@@ -14,6 +14,9 @@ public class Achievement {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "achievement_seq")
     private Long id;
     private String achievement;
+    @JoinColumn(name = "user_id")
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    private User userId;
 
     public Long getId() {
         return id;
@@ -29,5 +32,13 @@ public class Achievement {
 
     public void setAchievement(String achievement) {
         this.achievement = achievement;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 }

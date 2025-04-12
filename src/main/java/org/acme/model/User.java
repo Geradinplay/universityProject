@@ -21,7 +21,7 @@ private Long id;
 private String nickname;
 private int health;
 private Long experience;
-@ManyToMany(cascade = CascadeType.ALL)
+@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
 @JoinTable(//Промежуточная таблица
         name = "user_items",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -31,10 +31,10 @@ private List<Item> items;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "personal_data_id")
 private PersonalData personalData;
-@ManyToOne(cascade = CascadeType.ALL)
+@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
 @JoinColumn(name = "profession_id")
 private Profession profession;
-@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
 @JoinColumn(name = "achievement_id")
 private List <Achievement> achievements;
 
