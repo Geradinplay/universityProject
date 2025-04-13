@@ -12,6 +12,7 @@ import org.acme.rest.userDTO.ItemDTO;
 import org.acme.service.ItemService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Path("/items")
 public class ItemRest {
@@ -34,9 +35,15 @@ public class ItemRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response createItem(@Valid ItemDTO itemDTO) {
-        if (itemDTO == null) {
+
+        Optional<ItemDTO> optionalItemDTO = Optional.ofNullable(itemDTO);
+
+        try{
+            optionalItemDTO.orElseThrow(NullPointerException::new);
+        }catch (NullPointerException e){
             return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
         }
+
         try {
             Item item = itemMapper.toModel(itemDTO);
             itemService.createItem(item);
@@ -50,9 +57,16 @@ public class ItemRest {
     @DELETE
     @Path("/{id}")
     public Response deleteItemById(@PathParam("id") Long id) {
-        if (id == 0) {
+
+        Optional<Long> optionalId = Optional.ofNullable(id)
+                .filter(a -> a != 0L);
+
+        try {
+            optionalId.orElseThrow(IllegalArgumentException::new);
+        }catch (IllegalArgumentException e){
             return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
         }
+
         Item deleted = itemService.deleteItemById(id);
         if (deleted == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
@@ -65,9 +79,15 @@ public class ItemRest {
     @Path("/{id}")
     public Response updateItemById(@PathParam("id") Long id, Item updatedItem) {
         Item item =itemService.updateItemById(id, updatedItem);
-        if (item == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Item not modified!").build();
+
+        Optional<Item> optionalItem = Optional.ofNullable(item);
+        try{
+            optionalItem.orElseThrow(NullPointerException::new);
+        }catch (NullPointerException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity("Item is null!").build();
         }
+
+
 
         return Response.status(Response.Status.OK).entity(item).build();
     }

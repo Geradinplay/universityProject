@@ -14,6 +14,7 @@ import org.acme.service.ItemService;
 import org.acme.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Path("/user")
 public class UserRest {
