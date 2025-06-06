@@ -10,6 +10,7 @@ import org.acme.model.Item;
 import org.acme.rest.mapper.ItemMapper;
 import org.acme.rest.userDTO.ItemDTO;
 import org.acme.service.ItemService;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 
@@ -24,12 +25,14 @@ public class ItemRest {
     @Inject
     private ItemMapper itemMapper;
 
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllItems() {
         List<Item> items = itemService.getAllItems();
         return Response.ok().entity(items).build();
     }
+
 
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
